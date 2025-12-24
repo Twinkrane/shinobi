@@ -11,7 +11,14 @@
     </head>
 <body>
 
-<button id="clearStorage">Очистить данные</button>
+
+<div class="button-container">
+<button id="clearStorage">Новый персонаж</button>
+<button id="exportData">Сохранить персонажа</button>
+<input type="file" id="importData" accept=".json" style="display:none;">
+<button id="importDataButton">Загрузить персонажа</button>
+</div>
+
 
 <div class="parent">
 <div class="child">
@@ -210,6 +217,16 @@
 
 
 </div>
+</div>
+
+
+<div class="dice">
+    <svg id="rollDiceButton" class="die" viewBox="0 0 34 34" fill="none" stroke="black">
+        <path d="M30.6 9.3527L17.1417 1.69995L3.68335 9.3527M30.6 9.3527V24.1468L17.1417 32.0166M30.6 9.3527L17.1417 17.447M17.1417 32.0166L3.68335 24.1468V9.3527M17.1417 32.0166V17.447M3.68335 9.3527L17.1417 17.447" stroke="inherit"></path>
+    </svg>
+    <div id="diceResults">
+        <span id="resultText"></span>
+    </div>  
 </div>
 
 
