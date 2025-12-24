@@ -30,33 +30,46 @@ body {
 
 
 
-
-
-
-body{
-    font-family: Arial, sans-serif;
-    margin-top: 10px;
-    margin-left:10px;
+.button-container {
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    
-    background-image: url(ng.jpg), url(ng1.jpg);
-    background-repeat: no-repeat, no-repeat; /* Не повторять ни одно из изображений */
-    background-position: left center, right center; /* Первое слева, второе справа */
-    background-position: calc(0% + 70px) center, calc(100% - 10px) center;
-
-    
-    
-    
-
+    gap: 50px;
+    margin-bottom: 5px;
+    margin-right: 130px;
 }
 
-button{
-    margin-bottom: 10px;
-    margin-right: 195px;
+
+
+.dice {
+    display: flex;
+    margin: 350px  -50px;
+    cursor: pointer; /* Указатель при наведении */
+    width: 50px; /* Ширина изображения кубика */
+    height: 50px; /* Высота изображения кубика */
+   
+   
 }
+
+#diceResults {
+    margin-top: 50px;
+    margin-left: -45px;
+    display: none; /* Скрываем результаты по умолчанию */
+    position: absolute; /* Абсолютное позиционирование */
+    background-color: white; /* Фон результатов */
+    border: 1px solid black; /* Граница */
+    padding: 10px; /* Отступы */
+    border-radius: 5px; /* Закругленные углы */
+    text-align: center; /* Центрируем текст */
+    font-size: 18px; /* Размер шрифта для результатов */
+    color: black; /* Цвет текста */
+    pointer-events: none; /* Игнорируем события мыши для этого элемента */
+    user-select: none;
+   
+    
+}
+
+
 
 .parent
 {
@@ -549,4 +562,3 @@ select {
 label{
     font-weight: bold;
 }
-
