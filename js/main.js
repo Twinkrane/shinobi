@@ -213,3 +213,44 @@ document.getElementById('importDataButton').addEventListener('click', () => {
 // Добавляем обработчик события для SVG кубика
 document.getElementById('rollDiceButton').addEventListener('click', rollDice);
 
+
+
+let snowflakeInterval;
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            const size = Math.random() * 1 + 5; // Размер снежинки от 5 до 15 пикселей
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.left = `${Math.random() * window.innerWidth}px`; // Случайная позиция по горизонтали
+            snowflake.style.top = `-15px`;
+            // Установка случайной продолжительности анимации
+            const fallDuration = Math.random() * 3 + 2; // Случайная продолжительность падения (2-5 секунд)
+            snowflake.style.animationDuration = `${fallDuration}s`; // Установка продолжительности анимации
+
+            document.body.appendChild(snowflake);
+
+            // Удаление снежинки после завершения анимации
+            snowflake.addEventListener('animationend', () => {
+                snowflake.remove(); // Удаляем снежинку из DOM
+            });
+        }
+
+        function startFallingSnowflakes() {
+            snowflakeInterval = setInterval(createSnowflake, 10); // Создавать новую снежинку каждые 200 мс
+        }
+
+        function stopFallingSnowflakes() {
+            clearInterval(snowflakeInterval);
+            const snowflakes = document.querySelectorAll('.snowflake');
+            snowflakes.forEach(snowflake => snowflake.remove()); // Удалить все снежинки
+        }
+
+        document.getElementById('checkbox14').addEventListener('change', function() {
+            if (this.checked) {
+                startFallingSnowflakes(); // Начать падение снежинок
+            } else {
+                stopFallingSnowflakes(); // Остановить падение снежинок
+            }
+        });
