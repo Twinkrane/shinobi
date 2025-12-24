@@ -93,6 +93,13 @@ function clearStorage() {
     }
 }
 
+
+
+
+
+
+
+
 // Добавляем обработчик события для кнопки очистки
 document.getElementById('clearStorage').addEventListener('click', clearStorage);
 
@@ -123,6 +130,88 @@ rankSelect.addEventListener('change', saveSelect);
 
 const mercsSelect = document.getElementById('mercs-select');
 mercsSelect.addEventListener('change', saveSelect);
+
+
+
+
+
+
+
+
+
+
+
+
+// Функция для выгрузки данных
+function exportData() {
+    const inputs = document.querySelectorAll('input[type="text"], textarea');
+    const data = {};
+
+    inputs.forEach(input => {
+        data[input.id] = input.value;
+    });
+
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'character_data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// Функция для загрузки данных
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            for (const key in data) {
+                const input = document.getElementById(key);
+                if (input) {
+                    input.value = data[key];
+                    // Сохраняем загруженные значения в localStorage
+                    localStorage.setItem(key, data[key]);
+                }
+            }
+            
+        } catch (error) {
+            alert('Ошибка загрузки' + error.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+// Добавляем обработчики событий для кнопок
+document.getElementById('exportData').addEventListener('click', exportData);
+document.getElementById('importData').addEventListener('change', importData);
+document.getElementById('importDataButton').addEventListener('click', () => {
+    document.getElementById('importData').click();
+});
+
+ // Функция для генерации двух кубиков D6
+ function rollDice() {
+    const die1 = Math.floor(Math.random() * 6) + 1; // Генерация числа от 1 до 6
+    const die2 = Math.floor(Math.random() * 6) + 1; // Генерация числа от 1 до 6
+
+    // Отображение результатов
+    const resultText = `Бросок: ${die1} и ${die2}`;
+    document.getElementById('resultText').innerText = resultText;
+
+    const resultsDiv = document.getElementById('diceResults');
+    resultsDiv.style.display = 'block'; // Показываем результаты
+}
+
+// Добавляем обработчик события для SVG кубика
+document.getElementById('rollDiceButton').addEventListener('click', rollDice);
 
 
 
